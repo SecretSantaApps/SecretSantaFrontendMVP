@@ -1,4 +1,5 @@
 import { client } from '@/core/axios-client'
+import RoomDetails from "@/feature_rooms/presentation/components/RoomDetails.vue";
 
 export type RoomModel = {
   room_name: string
@@ -40,3 +41,4 @@ export const fetchRoomDetails = async (
   })
   return res.data
 }
+
