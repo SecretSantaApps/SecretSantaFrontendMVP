@@ -114,6 +114,7 @@
         })
         room.value = data
         isLoading.value = false
+        console.log(room.value?.users[1])
       })
       .catch(console.log)
   }

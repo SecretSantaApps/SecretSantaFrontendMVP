@@ -5,7 +5,7 @@
     <div class="flex flex-col">
       <h1 class="text-xl">{{ user.username }}</h1>
       <h2 v-if="hasWishes">Список желаний: {{ user.wishlist }}</h2>
-      <h2 class="text-rose-500 text-xl">
+      <h2 v-show="exists(user.accepted)" class="text-rose-500 text-xl">
         {{ user.accepted ? 'В игре' : 'Ожидает подтверждения' }}
       </h2>
     </div>
@@ -46,6 +46,7 @@
   import type { UserRoomInfo } from '@/feature_rooms/data/rooms-model'
   import { avatarUrl } from '@/core/utils/AvatarURL'
   import { ref } from 'vue'
+  import { exists } from "@/core/utils/exists";
 
   const props = defineProps<{
     user: UserRoomInfo

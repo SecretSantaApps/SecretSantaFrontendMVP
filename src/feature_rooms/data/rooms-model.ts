@@ -1,5 +1,4 @@
 import { client } from '@/core/axios-client'
-import type { AxiosResponse } from 'axios'
 
 export type RoomModel = {
   room_name: string
@@ -24,7 +23,7 @@ export type UserRoomInfo = {
   address?: string
   wishlist?: string
   avatar: string
-  accepted?: boolean
+  accepted: false
 }
 
 export type RoomCreationRequest = {
