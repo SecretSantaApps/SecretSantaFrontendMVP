@@ -12,6 +12,6 @@
 <template>
   <main class="w-full h-full flex flex-col justify-center items-center space-y-10">
     <h1 class="text-2xl">Hello!</h1>
-    <button @click="router.push('/login')" class="py-4 px-6 rounded-full bg-amber-50 text-3xl text-black">Login</button>
+    <button @click="router.push('/login')" class="py-4 px-6 rounded-full bg-amber-50 text-2xl text-black">Login</button>
   </main>
 </template>
