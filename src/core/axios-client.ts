@@ -7,18 +7,20 @@ const BASE_URL = ''
 
 export const client = axios.create({
   baseURL: BASE_URL,
-  headers: {
-    'client-id':
-      localStorage.getItem('clientId') ??
-      (() => {
-        localStorage.setItem('clientId', nanoid(6))
-        return localStorage.getItem('clientId')
-      })(),
-  },
 })
 
 client.interceptors.request.use(async request => {
-  if (request.url?.includes('/auth')) return request
+  if (request.url?.includes('/auth')) {
+    request.headers.set({
+      'client-id':
+        localStorage.getItem('clientId') ??
+        (() => {
+          localStorage.setItem('clientId', nanoid(6))
+          return localStorage.getItem('clientId')
+        })(),
+    })
+    return request
+  }
   const refresh = useRefresh()
   await refresh()
   console.log(`Access token: ${getAccessToken()}`)
