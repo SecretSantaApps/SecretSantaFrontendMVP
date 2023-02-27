@@ -16,9 +16,21 @@
         <div class="w-full flex-row items-start justify-items-start px-4">
           <h2>ID комнаты: {{ room.room_id }}</h2>
           <h2 v-if="room.max_price">Цена подарка: {{ room.max_price }}</h2>
-          <h2 v-if="room.recipient">
-            Ваш получатель подарка: {{ room.recipient }}
+          <h2 v-if="getRecipient()">
+            Ваш получатель подарка: {{ getRecipient() }}
           </h2>
+        </div>
+        <div
+          v-if="exists(gameStarted)"
+          class="flex flex-col w-full justify-center items-center pt-4"
+        >
+          <button
+            class="w-4/5 rounded-full py-4 px-2 space-x-4 text-white text-xl"
+            :class="gameStateButton.color"
+            @click="changeGameState"
+          >
+            {{ gameStateButton.text }}
+          </button>
         </div>
         <div
           class="px-4 pt-5 flex flex-col justify-center items-center space-y-3"
@@ -52,18 +64,20 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { computed, ref } from 'vue'
   import type { RoomDetailsModel } from '@/feature_rooms/data/rooms-model'
   import {
     acceptUserRequest,
     deleteRoomRequest,
     fetchRoomDetails,
     kickUserRequest,
+    setGameStateRequest,
   } from '@/feature_rooms/data/rooms-model'
   import RoomUsersListItem from '@/feature_rooms/presentation/components/room_details/RoomUsersListItem.vue'
   import { getSelfId } from '@/core/use-cases/get-self-id'
   import DeleteIcon from '@/assets/DeleteIcon.vue'
   import { useRouter } from 'vue-router'
+  import { exists } from '@/core/utils/exists'
 
   const props = defineProps<{
     id: string
@@ -79,10 +93,18 @@
 
   const isAdmin = ref(false)
 
+  const gameStarted = ref<boolean>()
+
+  const gameStateButton = computed(() => ({
+    text: gameStarted.value ? 'Остановить игру' : 'Начать игру',
+    color: gameStarted.value ? 'bg-rose-500' : 'bg-green-500',
+  }))
+
   const fetchDetails = () => {
     isLoading.value = true
     fetchRoomDetails(props.id)
       .then(data => {
+        gameStarted.value = exists(data.recipient)
         getSelfId().then(id => {
           selfId.value = id
           console.log(`Self id set to: ${selfId.value}`)
@@ -125,5 +147,19 @@
         router.push('/rooms')
       })
       .catch(console.log)
+  }
+
+  const getRecipient = (): string | null =>
+    room.value?.users.find(user => user.user_id === room.value?.recipient)
+      ?.username ?? null
+
+  const changeGameState = () => {
+    setGameStateRequest(room.value?.room_id!, !gameStarted.value)
+      .then(() => {
+        fetchDetails()
+      })
+      .catch(error =>
+        alert('Недостаточно игроков или есть неподтверждённые участники'),
+      )
   }
 </script>

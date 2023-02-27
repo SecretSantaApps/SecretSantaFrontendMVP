@@ -1,4 +1,5 @@
 import { client } from '@/core/axios-client'
+import type { AxiosResponse } from 'axios'
 
 export type RoomModel = {
   room_name: string
@@ -79,21 +80,34 @@ export const acceptUserRequest = async (
 }
 
 export const kickUserRequest = async (
-  roomId: string,
-  userId: string,
+  room_id: string,
+  user_id: string,
 ): Promise<{ status: number; message: string }> => {
   const res = await client.post('/api/v1/game/kick', {
-    room_id: roomId,
-    user_id: userId,
+    room_id,
+    user_id,
   })
   return { status: res.status, message: res.data }
 }
 
-export const deleteRoomRequest = async (roomId: string) => {
+export const deleteRoomRequest = async (
+  id: string,
+): Promise<{ status: number; message: string }> => {
   const res = await client.delete('/api/v1/room', {
     params: {
-      id: roomId,
+      id,
     },
   })
   return { status: res.status, message: res.data }
+}
+
+export const setGameStateRequest = async (
+  id: string,
+  state: boolean,
+): Promise<string> => {
+  return await client.post(`/api/v1/game/${state ? 'start' : 'stop'}`, null, {
+    params: {
+      id,
+    },
+  })
 }
