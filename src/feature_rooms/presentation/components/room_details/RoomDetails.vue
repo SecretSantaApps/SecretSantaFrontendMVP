@@ -17,12 +17,11 @@
           <h2>ID комнаты: {{ room.room_id }}</h2>
           <h2 v-if="room.max_price">Цена подарка: {{ room.max_price }}</h2>
           <h2 v-if="getRecipient()">
-
             Ваш получатель подарка: {{ getRecipient() }}
           </h2>
         </div>
         <div
-          v-if="exists(gameStarted)"
+          v-if="exists(gameStarted) && isAdmin"
           class="flex flex-col w-full justify-center items-center pt-4"
         >
           <button
