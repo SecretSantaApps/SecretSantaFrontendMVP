@@ -36,6 +36,18 @@ const router = createRouter({
       component: () =>
         import('../feature_rooms/presentation/views/RoomDetailsView.vue'),
     },
+    {
+      path: '/room/create',
+      name: 'roomCreation',
+      component: () =>
+        import('../feature_rooms/presentation/views/RoomCreationView.vue'),
+    },
+    {
+      path: '/room/join',
+      name: 'joinRoom',
+      component: () =>
+        import('../feature_rooms/presentation/views/JoinRoomView.vue'),
+    },
   ],
 })
 

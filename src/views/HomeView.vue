@@ -1,7 +1,12 @@
 <script setup lang="ts">
   import { useRouter } from 'vue-router'
+  import { checkSignedIn } from '@/core/use-cases/check-signed-in'
 
   const router = useRouter()
+
+  if (checkSignedIn()) {
+    window.location.href = '/rooms'
+  }
 </script>
 
 <template>

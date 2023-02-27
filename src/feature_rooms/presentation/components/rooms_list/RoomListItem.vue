@@ -21,7 +21,15 @@
   }>()
 
   const gameState = computed(() => ({
-    text: props.room.game_started ? 'Игра началась' : 'Ожидаем игроков',
-    color: props.room.game_started ? 'bg-green-600' : 'bg-rose-400',
+    text: props.room.accepted
+      ? props.room.game_started
+        ? 'Игра началась'
+        : 'Ожидаем игроков'
+      : 'Подтверждение',
+    color: props.room.accepted
+      ? props.room.game_started
+        ? 'bg-green-600'
+        : 'bg-rose-400'
+      : 'bg-amber-400',
   }))
 </script>
