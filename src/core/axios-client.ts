@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 import { useRefresh } from '@/core/use-cases/refresh'
 import { getAccessToken } from '@/core/token-storage'
 
-const BASE_URL = ''
+const BASE_URL = import.meta.env.VITE_BASE_URL ?? ''
 
 export const client = axios.create({
   baseURL: BASE_URL,
