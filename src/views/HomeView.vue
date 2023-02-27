@@ -10,8 +10,8 @@
 </script>
 
 <template>
-  <main class="w-full h-full flex flex-col justify-center items-center">
-    <h1>Hello!</h1>
+  <main class="w-full h-full flex flex-col justify-center items-center space-x-10">
+    <h1 class="text-2xl">Hello!</h1>
     <button @click="router.push('/login')">Login</button>
   </main>
 </template>

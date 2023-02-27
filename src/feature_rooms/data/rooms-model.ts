@@ -89,3 +89,12 @@ export const kickUserRequest = async (
   })
   return { status: res.status, message: res.data }
 }
+
+export const deleteRoomRequest = async (roomId: string) => {
+  const res = await client.delete('/api/v1/room', {
+    params: {
+      id: roomId,
+    },
+  })
+  return { status: res.status, message: res.data }
+}

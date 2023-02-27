@@ -2,18 +2,22 @@
   <div class="flex flex-col w-full">
     <Header heading-text="Список комнат" />
     <div class="flex flex-row w-full justify-center space-x-4 py-6">
-      <button class="p-4 bg-amber-500 rounded-full text-black" @click="router.push('/room/create')">
+      <button
+        class="p-4 bg-amber-500 rounded-full text-black text-xl"
+        @click="router.push('/room/create')"
+      >
         Создать комнату
       </button>
-      <button class="p-4 bg-amber-500 rounded-full text-black" @click="router.push('/room/join')">
+      <button
+        class="p-4 bg-amber-500 rounded-full text-black text-xl"
+        @click="router.push('/room/join')"
+      >
         Присоединиться к комнате
       </button>
     </div>
   </div>
 
-  <div
-    class="w-full h-full flex flex-col space-y-10 items-center pt-16"
-  >
+  <div class="w-full h-full flex flex-col space-y-10 items-center pt-16">
     <RoomListItem
       v-if="rooms"
       v-for="room in rooms"
@@ -21,7 +25,7 @@
       :room="room"
       @click="room.accepted && showDetails(room.room_id)"
     />
-    <h1 v-else>Loading rooms</h1>
+    <h1 v-else class="text-2xl">Loading</h1>
   </div>
 </template>
 

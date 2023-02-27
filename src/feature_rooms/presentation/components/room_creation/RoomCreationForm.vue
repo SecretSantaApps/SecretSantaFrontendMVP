@@ -2,7 +2,7 @@
   <div
     class="flex flex-col space-y-3 justify-center items-center w-60 text-black"
   >
-    <h1 v-if="loading" class="text-white">Loading</h1>
+    <h1 v-if="loading" class="text-white text-2xl">Loading</h1>
     <form @submit.prevent="createRoom" class="space-y-3 justify-center" v-else>
       <input
         required
