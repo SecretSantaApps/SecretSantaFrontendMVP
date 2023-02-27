@@ -8,6 +8,7 @@
         required
         v-model="store.room_name"
         placeholder="Enter room name"
+        maxlength="18"
         class="w-full h-8 rounded select-none outline-none focus:outline-none active:outline-none px-4 py-2"
       />
 <!--      <div
@@ -19,11 +20,14 @@
       <textarea
         v-model="store.wishlist"
         placeholder="Enter your wishes"
+        maxlength="100"
         class="w-full h-16 rounded select-none outline-none focus:outline-none active:outline-none px-4 py-2"
       />
       <input
         placeholder="Enter gift price (optional)"
         v-model="store.max_price"
+        type="number"
+        maxlength="6"
         class="w-full h-8 rounded select-none outline-none focus:outline-none active:outline-none px-4 py-2"
       />
 
