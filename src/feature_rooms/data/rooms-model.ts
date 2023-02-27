@@ -28,7 +28,6 @@ export type UserRoomInfo = {
 
 export type RoomCreationRequest = {
   room_name: string
-  playable_owner: boolean
   wishlist?: string
   max_price?: number
 }

@@ -24,6 +24,14 @@
       >
         Отклонить
       </button>
+
+      <button
+        v-show="!hasAcceptButton && hasKickButton"
+        class="p-1 rounded-full bg-amber-50 text-rose-600"
+        @click="emit('kick')"
+      >
+        Исключить
+      </button>
     </div>
     <div>
       <img
@@ -42,11 +50,13 @@
   const props = defineProps<{
     user: UserRoomInfo
     hasAcceptButton: boolean
+    hasKickButton: boolean
   }>()
 
   const emit = defineEmits<{
     (e: 'accept'): void
     (e: 'decline'): void
+    (e: 'kick'): void
   }>()
 
   const hasWishes = ref(props.user.wishlist?.length ?? 0 > 0)

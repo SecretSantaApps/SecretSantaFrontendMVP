@@ -31,6 +31,10 @@
             :key="user.user_id"
             v-on:accept="acceptUser(user.user_id)"
             v-on:decline="kickUser(user.user_id)"
+            v-on:kick="kickUser(user.user_id)"
+            :has-kick-button="
+              isAdmin && user.accepted && checkSelfId(user.user_id)
+            "
           />
         </div>
       </div>
@@ -71,6 +75,8 @@
 
   const isLoading = ref(false)
 
+  const selfId = ref<string>()
+
   const isAdmin = ref(false)
 
   const fetchDetails = () => {
@@ -78,6 +84,8 @@
     fetchRoomDetails(props.id)
       .then(data => {
         getSelfId().then(id => {
+          selfId.value = id
+          console.log(`Self id set to: ${selfId.value}`)
           if (id === data.owner_id) {
             isAdmin.value = true
           }
@@ -89,6 +97,8 @@
   }
 
   fetchDetails()
+
+  const checkSelfId = (id: string) => id !== selfId.value
 
   const acceptUser = (id: string) => {
     isLoading.value = true

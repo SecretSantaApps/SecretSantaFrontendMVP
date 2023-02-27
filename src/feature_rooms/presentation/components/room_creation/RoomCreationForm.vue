@@ -10,12 +10,12 @@
         placeholder="Enter room name"
         class="w-full h-8 rounded select-none outline-none focus:outline-none active:outline-none px-4 py-2"
       />
-      <div
+<!--      <div
         class="flex flex-row outline-2 outline-amber-500 space-x-4 justify-center items-center"
       >
         <input type="checkbox" v-model="store.playable_owner" class="w-4 h-4" />
         <p class="text-white">Room owner is also player</p>
-      </div>
+      </div>-->
       <textarea
         v-model="store.wishlist"
         placeholder="Enter your wishes"
